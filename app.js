@@ -30,6 +30,9 @@ app.get('/restaurants/:id', (req, res) => {
 
 // http://localhost:3000/search => 搜尋功能
 app.get('/search', (req, res) => {
+  if (!req.query.keyword) {
+    return res.redirect('/')
+  }
   let keyword = req.query.keyword.trim()
   const filterRestaurants = restaurants.filter((restaurant) => {
     return (
