@@ -11,9 +11,9 @@
 
 ## Screen Photos 專案畫面
 
-![首頁]()
+![首頁](https://github.com/shorty60/restaurant/blob/main/public/image/index.jpg)
 ![搜尋]()
-![詳細資料]()
+![詳細資料](https://github.com/shorty60/restaurant/blob/main/public/image/show.jpg)
 
 ## Getting Started 開始
 

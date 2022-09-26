@@ -1,25 +1,25 @@
-// Incliude required packages from node_modules and setting server related parameters
+// Include required packages from node_modules and setting server related parameters
 const express = require('express')
 const app = express()
 const port = 3000
 
 const exphbs = require('express-handlebars')
 
-const restaurantsList = require('./restaurant.json').results
-// setting virw engine
+const restaurantsList = require('./restaurant.json').results //Include restaurants data from JSON file
+// Setting view engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// setting static files
+// Setting static files
 app.use(express.static('public'))
 
-// setting route
-// http://localhost/restaurants => index page
+////  Setting route
+// http://localhost:3000/ => index page
 app.get('/', (req, res) => {
   res.render('index', { restaurants: restaurantsList })
 })
 
-// http://localhost/restaurants/:id => show page
+// http://localhost0/restaurants/:id => show page
 app.get('/restaurants/:id', (req, res) => {
   const restaurant = restaurantsList.find(
     (restaurant) => restaurant.id.toString() === req.params.id
@@ -27,7 +27,19 @@ app.get('/restaurants/:id', (req, res) => {
   res.render('show', { restaurant })
 })
 
-// listen on localhost://3000
+// http://localhost:3000/search => 搜尋功能
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim()
+  const filterRestaurants = restaurantsList.filter((restaurant) => {
+    return (
+      restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
+      restaurant.category.toLowerCase().includes(keyword.toLowerCase())
+    )
+  })
+  res.render('index', { restaurants: filterRestaurants, keyword })
+})
+
+// Listen on localhost://3000
 app.listen(port, () => {
   console.log(`Restaurant List is listening on http://localhost:${port}`)
 })
