@@ -12,7 +12,7 @@
 ## Screen Photos 專案畫面
 
 ![首頁](https://github.com/shorty60/restaurant/blob/main/public/image/index.jpg)
-![搜尋]()
+![搜尋](https://github.com/shorty60/restaurant/blob/main/public/image/search.jpg)
 ![詳細資料](https://github.com/shorty60/restaurant/blob/main/public/image/show.jpg)
 
 ## Getting Started 開始
@@ -28,7 +28,7 @@
 1.開啟您的終端機(Terminal)或 git-bash(for Windows) 將此專案 clone 到本機位置並執行:
 
 ```
-git clone https://github.com/
+git clone https://github.com/shorty60/restaurant.git
 ```
 
 2.移動至專案資料夾
