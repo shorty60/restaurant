@@ -2,7 +2,7 @@
 
 此專案可讓使用者看到餐廳清單、詳細餐廳資訊。
 
-## Features 功能列表
+## Features 功能描述
 
 - 在首頁檢視餐廳清單和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分
 - 依照餐廳名稱及餐廳類別搜尋餐廳
@@ -11,13 +11,21 @@
 
 ## Screen Photos 專案畫面
 
+#### 首頁
+
 ![首頁](https://github.com/shorty60/restaurant/blob/main/public/image/index.jpg)
+
+#### 搜尋
+
 ![搜尋](https://github.com/shorty60/restaurant/blob/main/public/image/search.jpg)
+
+#### 詳細資料
+
 ![詳細資料](https://github.com/shorty60/restaurant/blob/main/public/image/show.jpg)
 
 ## Getting Started 開始
 
-## Prerequisites 必須套件
+### Prerequisites 環境建置與需求
 
 如果您是 windows 使用者，但尚未安裝 git bash，請先安裝 git bash 以進行下面指令列操作
 
@@ -46,7 +54,7 @@ npm install  //安裝套件
 4.開啟程式
 
 ```
-npm run start  //執行程式
+npm run dev  //執行程式
 ```
 
 若終端機(for Mac OS)或 git bash(for windows)顯示 `Restaurant List is listening on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
