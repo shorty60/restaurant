@@ -4,10 +4,9 @@ const exphbs = require('express-handlebars')
 const alert = require('alert')
 const mongoose = require('mongoose') // 載入mongoose
 
+const Restaurant = require('./models/restaurant') // 載入restaurant model
 const app = express()
 const port = 3000
-
-const restaurants = require('./restaurant.json').results //Include restaurants data from JSON file
 
 // 設定mongoDB連線
 mongoose.connect(process.env.MONGODB_URI)
@@ -31,7 +30,10 @@ app.use(express.static('public'))
 ////  Setting route
 // http://localhost:3000/ => index page
 app.get('/', (req, res) => {
-  res.render('index', { restaurants })
+  return Restaurant.find() //透過mongoose去資料庫拿所有資料
+    .lean() // 將拿到的資料整理成乾淨的JS陣列
+    .then(restaurants => res.render('index', { restaurants })) // 拿到後放入變數restaurants
+    .catch(error => console.error(error)) // error handling
 })
 
 // http://localhost0/restaurants/:id => show page
