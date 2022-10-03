@@ -96,3 +96,9 @@ header {
     height: auto;
   }
 }
+
+#footer {
+  position: fixed;
+  right: 5rem;
+  bottom: 1rem;
+}

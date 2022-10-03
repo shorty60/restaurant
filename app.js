@@ -38,10 +38,11 @@ app.get('/', (req, res) => {
 
 // http://localhost0/restaurants/:id => show page
 app.get('/restaurants/:id', (req, res) => {
-  const restaurant = restaurants.find(
-    restaurant => restaurant.id.toString() === req.params.id
-  )
-  res.render('show', { restaurant })
+  const id = req.params.id
+  return Restaurant.findById(id) // 用從URL抓到的id來查詢資料庫
+    .lean() // 整理成乾淨JS物件
+    .then(restaurant => res.render('show', { restaurant })) // 如果有在資料庫找到該id對應資料，請模板引擎render show模板
+    .catch(error => console.log(error)) // error handling
 })
 
 // http://localhost:3000/search => 搜尋功能
