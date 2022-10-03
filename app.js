@@ -1,11 +1,25 @@
 // Include required packages from node_modules and setting server related parameters
 const express = require('express')
+const exphbs = require('express-handlebars')
+const alert = require('alert')
+const mongoose = require('mongoose') // 載入mongoose
+
 const app = express()
 const port = 3000
 
-const exphbs = require('express-handlebars')
-const alert = require('alert')
 const restaurants = require('./restaurant.json').results //Include restaurants data from JSON file
+
+// 設定mongoDB連線
+mongoose.connect(process.env.MONGODB_URI)
+// 取得連線狀態
+const db = mongoose.connection
+db.on('error', () => {
+  console.log('Error on MongoDB connection!')
+})
+
+db.once('open', () => {
+  console.log('MongoDB connected')
+})
 
 // Setting view engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -23,7 +37,7 @@ app.get('/', (req, res) => {
 // http://localhost0/restaurants/:id => show page
 app.get('/restaurants/:id', (req, res) => {
   const restaurant = restaurants.find(
-    (restaurant) => restaurant.id.toString() === req.params.id
+    restaurant => restaurant.id.toString() === req.params.id
   )
   res.render('show', { restaurant })
 })
@@ -34,7 +48,7 @@ app.get('/search', (req, res) => {
     return res.redirect('/')
   }
   let keyword = req.query.keyword.trim()
-  const filterRestaurants = restaurants.filter((restaurant) => {
+  const filterRestaurants = restaurants.filter(restaurant => {
     return (
       restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
       restaurant.category.toLowerCase().includes(keyword.toLowerCase())
