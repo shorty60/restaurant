@@ -24,6 +24,8 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// set body-parser
+app.use(express.urlencoded({ extended: true }))
 // Setting static files
 app.use(express.static('public'))
 
@@ -66,6 +68,36 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurants: filterRestaurants, keyword })
 })
 
+// http://localhost:3000/:id/edit => 進入編輯頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit/', (req, res) => {
+  const id = req.params.id
+  const restaurantUpdated = req.body
+  restaurantUpdated.rating = Number(restaurantUpdated.rating) // 處理rating data type
+
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = restaurantUpdated.name
+      restaurant.category = restaurantUpdated.category
+      restaurant.image = restaurantUpdated.image
+      restaurant.location = restaurantUpdated.location
+      restaurant.phone = restaurantUpdated.phone
+      restaurant.google_map = restaurantUpdated.google_map
+      restaurant.rating = restaurantUpdated.rating
+      restaurant.description = restaurantUpdated.description
+
+      restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}/`))
+    .catch(error => console.log(error))
+})
 // Listen on localhost://3000
 app.listen(port, () => {
   console.log(`Restaurant List is listening on http://localhost:${port}`)
