@@ -34,8 +34,15 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   return Restaurant.find() //透過mongoose去資料庫拿所有資料
     .lean() // 將拿到的資料整理成乾淨的JS陣列
-    .then(restaurants => res.render('index', { restaurants })) // 拿到後放入變數restaurants
-    .catch(error => console.error(error)) // error handling
+    .then(restaurants => {
+      if (!restaurants.length) {
+        alert('還沒有餐廳資料喔!\n快來新增第一筆吧!')
+      }
+      res.render('index', { restaurants })
+    }) // 拿到後放入變數restaurants
+    .catch(error => {
+      console.error(error)
+    }) // error handling
 })
 
 // http://localhost0/restaurants/:id => show page
@@ -43,8 +50,16 @@ app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id) // 用從URL抓到的id來查詢資料庫
     .lean() // 整理成乾淨JS物件
-    .then(restaurant => res.render('show', { restaurant })) // 如果有在資料庫找到該id對應資料，請模板引擎render show模板
-    .catch(error => console.log(error)) // error handling
+    .then(restaurant => {
+      if (!restaurant) {
+        return res.render('error')
+      }
+      res.render('show', { restaurant })
+    }) // 如果有在資料庫找到該id對應資料，請模板引擎render show模板
+    .catch(error => {
+      console.log(error)
+      return res.render('error')
+    }) // error handling
 })
 
 // http://localhost:3000/search => 搜尋功能
@@ -73,8 +88,16 @@ app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
-    .catch(error => console.log(error))
+    .then(restaurant => {
+      if (!restaurant) {
+        return res.render('error')
+      }
+      res.render('edit', { restaurant })
+    })
+    .catch(error => {
+      console.log(error)
+      return res.render('error')
+    })
 })
 
 app.post('/restaurants/:id/edit/', (req, res) => {
@@ -84,6 +107,9 @@ app.post('/restaurants/:id/edit/', (req, res) => {
 
   return Restaurant.findById(id)
     .then(restaurant => {
+      if (!restaurant) {
+        return alert(`Oops! 找不到這個餐廳!抱歉`)
+      }
       restaurant.name = restaurantUpdated.name
       restaurant.category = restaurantUpdated.category
       restaurant.image = restaurantUpdated.image
@@ -93,10 +119,30 @@ app.post('/restaurants/:id/edit/', (req, res) => {
       restaurant.rating = restaurantUpdated.rating
       restaurant.description = restaurantUpdated.description
 
-      restaurant.save()
+      return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}/`))
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      return res.render('error')
+    })
+})
+
+// Delete function
+app.post('/restaurants/:id/delete/', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      if (!restaurant) {
+        return alert(`Oops! 找不到這個餐廳!抱歉`)
+      }
+      return restaurant.remove()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => {
+      console.log(error)
+      return res.render('error')
+    })
 })
 // Listen on localhost://3000
 app.listen(port, () => {
