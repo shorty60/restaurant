@@ -158,6 +158,7 @@ app.post('/restaurants/:id/delete/', (req, res) => {
       return res.render('error')
     })
 })
+
 // Listen on localhost://3000
 app.listen(port, () => {
   console.log(`Restaurant List is listening on http://localhost:${port}`)
