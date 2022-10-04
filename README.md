@@ -70,7 +70,7 @@ export MONGODB_URI="你的MongoDB連線字串" // for bash (Both MacOS bash term
 5.寫入種子資料
 
 ```
-npm run seed  //執行程式
+npm run seed
 ```
 
 6.開啟程式
@@ -82,7 +82,7 @@ npm run start  //執行程式
 7.若終端機(for Mac OS)或 git bash(for windows)顯示
 
 ```
-Restaurant List is listening on http://localhost:3000`
+Restaurant List is listening on http://localhost:3000
 ```
 
 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
