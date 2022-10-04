@@ -132,23 +132,10 @@ app.post('/restaurants/:id/edit/', (req, res) => {
   const restaurantUpdated = req.body
   restaurantUpdated.rating = Number(restaurantUpdated.rating) // 處理rating data type
 
-  return Restaurant.findById(id)
-    .then(restaurant => {
-      if (!restaurant) {
-        return alert(`Oops! 找不到這個餐廳!抱歉`)
-      }
-      restaurant.name = restaurantUpdated.name
-      restaurant.category = restaurantUpdated.category
-      restaurant.image = restaurantUpdated.image
-      restaurant.location = restaurantUpdated.location
-      restaurant.phone = restaurantUpdated.phone
-      restaurant.google_map = restaurantUpdated.google_map
-      restaurant.rating = restaurantUpdated.rating
-      restaurant.description = restaurantUpdated.description
-
-      return restaurant.save()
+  return Restaurant.findByIdAndUpdate(id, restaurantUpdated)
+    .then(() => {
+      return res.redirect(`/restaurants/${id}/`)
     })
-    .then(() => res.redirect(`/restaurants/${id}/`))
     .catch(error => {
       console.log(error)
       return res.render('error')
