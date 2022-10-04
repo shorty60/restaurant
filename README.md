@@ -58,13 +58,40 @@ cd restaurant //切至專案資料夾
 npm install  //安裝套件
 ```
 
-4.開啟程式
+4.設定 MongoDB 環境變數
+
+```
+set "MONGODB_URI=你的MongoDB連線字串" // for Windows cmd
+
+export MONGODB_URI="你的MongoDB連線字串" // for bash (Both MacOS bash terminal and Git bash for Windows)
+
+```
+
+5.寫入種子資料
+
+```
+npm run seed  //執行程式
+```
+
+6.開啟程式
 
 ```
 npm run start  //執行程式
 ```
 
-若終端機(for Mac OS)或 git bash(for windows)顯示 `Restaurant List is listening on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
+7.若終端機(for Mac OS)或 git bash(for windows)顯示
+
+```
+Restaurant List is listening on http://localhost:3000`
+```
+
+即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
+
+8.中斷伺服器連線，請按
+
+```
+ctrl + c
+```
 
 ## Built With 開發環境及套件
 
