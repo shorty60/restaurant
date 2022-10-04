@@ -14,7 +14,6 @@ db.once('open', () => {
   console.log('MongoDB connected, start writing seeds...')
   restaurantDatas.forEach(data => {
     Restaurant.create({
-      _id: data.id,
       name: data.name,
       name_en: data.name_en,
       category: data.category,

@@ -1,10 +1,6 @@
 const mongoose = require('mongoose') // 載入mongoose
 const Schema = mongoose.Schema // 把mongoose.Schema方法存到Schema變數
 const restaurantSchema = new Schema({
-  _id: {
-    type: Number,
-    required: true,
-  },
   name: {
     type: String,
     required: true,

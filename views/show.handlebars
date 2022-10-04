@@ -4,16 +4,20 @@
     <div class='col-12 col-md-10 mx-auto'>
       <div class='buttons mb-3'>
         <a
-          class='btn btn-info'
+          class='btn btn-info mr-2'
           href='/restaurants/{{restaurant._id}}/edit'
-          role='button'
-        >Edit</a>
+        ><i class='fa-regular fa-pen-to-square mr-1'></i>
+          Edit
+        </a>
         <form
           action='/restaurants/{{restaurant._id}}/delete'
           method='POST'
           style='display: inline;'
         >
-          <button type='submit' class='btn btn-outline-danger'>Delete</button>
+          <button type='submit' class='btn btn-outline-danger'>
+            <i class='fa-regular fa-trash-can'></i>
+            Delete
+          </button>
         </form>
       </div>
       <p class='mb-1'>
