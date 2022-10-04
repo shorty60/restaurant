@@ -20,6 +20,7 @@
                   class='form-control'
                   id='name'
                   value='{{restaurant.name}}'
+                  required
                 />
               </div>
             </div>
@@ -35,6 +36,7 @@
                   name='category'
                   id='category'
                   value='{{restaurant.category}}'
+                  required
                 />
                 <datalist id='categories'>
                   <option>中東料理</option>
@@ -62,6 +64,7 @@
                   class='form-control'
                   id='location'
                   value='{{restaurant.location}}'
+                  required
                 />
               </div>
             </div>
@@ -76,6 +79,7 @@
                   class='form-control'
                   id='google_map'
                   value='{{restaurant.google_map}}'
+                  required
                 />
               </div>
             </div>
@@ -90,6 +94,7 @@
                   class='form-control'
                   id='phone'
                   value='{{restaurant.phone}}'
+                  required
                 />
               </div>
             </div>
@@ -107,6 +112,7 @@
                   max='5'
                   step='.1'
                   value='{{restaurant.rating}}'
+                  required
                 />
                 <small class='text-muted form-text'>評價 0 ~ 5 分
                   這家店值得幾分呢?</small>
@@ -123,6 +129,7 @@
                   class='form-control'
                   id='image'
                   value='{{restaurant.image}}'
+                  required
                 />
               </div>
             </div>
@@ -137,6 +144,7 @@
                   class='form-control'
                   id='description'
                   rows='8'
+                  required
                 >{{restaurant.description}}</textarea>
                 <small
                   class='text-muted form-text'
@@ -145,7 +153,11 @@
             </div>
             <!-- submit button -->
             <div class='d-flex justify-content-end'>
-              <button class='btn btn-success' type='submit'>Save</button>
+              <button
+                class='btn btn-success'
+                type='submit'
+                id='submitButton'
+              >Save</button>
             </div>
           </form>
 

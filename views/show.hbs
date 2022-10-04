@@ -14,7 +14,11 @@
           method='POST'
           style='display: inline;'
         >
-          <button type='submit' class='btn btn-outline-danger'>
+          <button
+            type='submit'
+            class='btn btn-outline-danger'
+            onclick='onDeleteClicked()'
+          >
             <i class='fa-regular fa-trash-can'></i>
             Delete
           </button>
@@ -64,3 +68,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  function onDeleteClicked() { alert('這筆資料即將被刪除') }
+</script>

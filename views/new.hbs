@@ -20,6 +20,7 @@
                   class='form-control'
                   placeholder='請輸入餐廳名稱'
                   id='name'
+                  required
                 />
               </div>
             </div>
@@ -34,6 +35,7 @@
                   class='form-control'
                   name='category'
                   id='category'
+                  required
                 />
                 <datalist id='categories'>
                   <option>中東料理</option>
@@ -61,6 +63,7 @@
                   class='form-control'
                   id='location'
                   placeholder='輸入地址'
+                  required
                 />
               </div>
             </div>
@@ -75,6 +78,7 @@
                   class='form-control'
                   id='google_map'
                   placeholder='輸入google地圖連結，其他人可以更快找到餐廳'
+                  required
                 />
               </div>
             </div>
@@ -89,6 +93,7 @@
                   class='form-control'
                   id='phone'
                   placeholder='請輸入電話'
+                  required
                 />
               </div>
             </div>
@@ -105,6 +110,7 @@
                   min='0'
                   max='5'
                   step='.1'
+                  required
                 />
                 <small class='text-muted form-text'>評價 0 ~ 5 分
                   這家店值得幾分呢?</small>
@@ -121,6 +127,7 @@
                   class='form-control'
                   id='image'
                   placeholder='店家圖片連結'
+                  required
                 />
               </div>
             </div>
@@ -136,6 +143,7 @@
                   id='description'
                   placeholder='向大家介紹一下這家店吧!'
                   rows='8'
+                  required
                 >{{restaurant.description}}</textarea>
                 <small
                   class='text-muted form-text'
@@ -144,7 +152,11 @@
             </div>
             <!-- submit button -->
             <div class='d-flex justify-content-end'>
-              <button class='btn btn-success' type='submit'>Create</button>
+              <button
+                class='btn btn-success'
+                type='submit'
+                id='submitButton'
+              >Create</button>
             </div>
           </form>
 

@@ -74,7 +74,11 @@
                   method='POST'
                   style='display: inline;'
                 >
-                  <button type='submit' class='btn btn-outline-danger btn-sm'>
+                  <button
+                    type='sumbit'
+                    class='btn btn-outline-danger btn-sm'
+                    onclick='onDeleteClicked()'
+                  >
                     <i class='fa-regular fa-trash-can'></i>
                   </button>
                 </form>
@@ -89,3 +93,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  function onDeleteClicked() { alert('這筆資料即將被刪除') }
+</script>
