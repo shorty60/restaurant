@@ -5,9 +5,12 @@
 ## Features 功能描述
 
 - 在首頁檢視餐廳清單和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分
+- 可以新增沒在清單上的餐廳
 - 依照餐廳名稱及餐廳類別搜尋餐廳
 - 檢視個別餐廳詳細資訊，包含:類別、地址、電話、描述、圖片以及 Google Map 地圖
   - 在地址列點選 飛機圖示 可打開 google map 查看位置詳細資料以及規劃路線
+- 您也可以修改目前已有的餐廳資料，告訴我們最即時詳盡的餐廳資訊
+- 可以移除餐廳資料
 
 ## Screen Photos 專案畫面
 
@@ -22,6 +25,10 @@
 #### 詳細資料
 
 ![詳細資料](https://github.com/shorty60/restaurant/blob/main/public/image/show.jpg)
+
+#### 新增
+
+![詳細資料](https://github.com/shorty60/restaurant/blob/main/public/image/new.jpg)
 
 ## Getting Started 開始
 
@@ -54,7 +61,7 @@ npm install  //安裝套件
 4.開啟程式
 
 ```
-npm run dev  //執行程式
+npm run start  //執行程式
 ```
 
 若終端機(for Mac OS)或 git bash(for windows)顯示 `Restaurant List is listening on http://localhost:3000` 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
