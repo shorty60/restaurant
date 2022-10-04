@@ -5,10 +5,10 @@
       <div class='card'>
         <div class='card-body'>
           <h5 class='card-title'>
-            {{restaurant.name}}
+            新增你喜歡的餐廳
             <i class='fa-solid fa-utensils'></i></h5>
           <hr />
-          <form method='POST' action='/restaurants/{{restaurant._id}}/edit'>
+          <form method='POST' action='/restaurants'>
             <div class='row g-2 mb-3'>
               <label for='name' class='col-md-4 col-form-label'>
                 Restaurant Name
@@ -18,8 +18,8 @@
                   type='text'
                   name='name'
                   class='form-control'
+                  placeholder='請輸入餐廳名稱'
                   id='name'
-                  value='{{restaurant.name}}'
                 />
               </div>
             </div>
@@ -34,7 +34,6 @@
                   class='form-control'
                   name='category'
                   id='category'
-                  value='{{restaurant.category}}'
                 />
                 <datalist id='categories'>
                   <option>中東料理</option>
@@ -45,6 +44,9 @@
                   <option>咖啡</option>
                   <option>韓式料理</option>
                 </datalist>
+                <small
+                  class='text-muted form-text'
+                >選擇類型，若找不到可以自行輸入</small>
               </div>
 
             </div>
@@ -58,7 +60,7 @@
                   name='location'
                   class='form-control'
                   id='location'
-                  value='{{restaurant.location}}'
+                  placeholder='輸入地址'
                 />
               </div>
             </div>
@@ -72,7 +74,7 @@
                   name='google_map'
                   class='form-control'
                   id='google_map'
-                  value='{{restaurant.google_map}}'
+                  placeholder='輸入google地圖連結，其他人可以更快找到餐廳'
                 />
               </div>
             </div>
@@ -86,7 +88,7 @@
                   name='phone'
                   class='form-control'
                   id='phone'
-                  value='{{restaurant.phone}}'
+                  placeholder='請輸入電話'
                 />
               </div>
             </div>
@@ -103,9 +105,9 @@
                   min='0'
                   max='5'
                   step='.1'
-                  value='{{restaurant.rating}}'
                 />
-                <small class='text-muted form-text'>Rates between 0 ~ 5</small>
+                <small class='text-muted form-text'>評價 0 ~ 5 分
+                  這家店值得幾分呢?</small>
               </div>
             </div>
             <div class='row g-2 mb-3'>
@@ -118,7 +120,7 @@
                   name='image'
                   class='form-control'
                   id='image'
-                  value='{{restaurant.image}}'
+                  placeholder='店家圖片連結'
                 />
               </div>
             </div>
@@ -132,15 +134,17 @@
                   name='description'
                   class='form-control'
                   id='description'
+                  placeholder='向大家介紹一下這家店吧!'
                   rows='8'
                 >{{restaurant.description}}</textarea>
-                <small class='text-muted form-text'>Introduce this restaurant to
-                  us</small>
+                <small
+                  class='text-muted form-text'
+                >向大家介紹一下這家店吧</small>
               </div>
             </div>
             <!-- submit button -->
             <div class='d-flex justify-content-end'>
-              <button class='btn btn-success' type='submit'>Save</button>
+              <button class='btn btn-success' type='submit'>Create</button>
             </div>
           </form>
 

@@ -1,0 +1,160 @@
+<div class='container py-5'>
+
+  <div class='row'>
+    <div class='col-12 col-lg-10 col-xl-8 mx-auto'>
+      <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>
+            {{restaurant.name}}
+            <i class='fa-solid fa-utensils'></i></h5>
+          <hr />
+          <form method='POST' action='/restaurants/{{restaurant._id}}/edit'>
+            <div class='row g-2 mb-3'>
+              <label for='name' class='col-md-4 col-form-label'>
+                Restaurant Name
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='text'
+                  name='name'
+                  class='form-control'
+                  id='name'
+                  value='{{restaurant.name}}'
+                />
+              </div>
+            </div>
+            <div class='form-group row g-2 mb-3'>
+              <label
+                for='category'
+                class='col-md-4 col-form-label'
+              >Category</label>
+              <div class='col-md-8'>
+                <input
+                  list='categories'
+                  class='form-control'
+                  name='category'
+                  id='category'
+                  value='{{restaurant.category}}'
+                />
+                <datalist id='categories'>
+                  <option>中東料理</option>
+                  <option>酒吧</option>
+                  <option>義式餐廳</option>
+                  <option>美式</option>
+                  <option>日本料理</option>
+                  <option>咖啡</option>
+                  <option>韓式料理</option>
+                </datalist>
+                <small
+                  class='text-muted form-text'
+                >選擇類型，若找不到可以自行輸入</small>
+              </div>
+
+            </div>
+            <div class='row g-2 mb-3'>
+              <label for='location' class='col-md-4 col-form-label'>
+                Location
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='text'
+                  name='location'
+                  class='form-control'
+                  id='location'
+                  value='{{restaurant.location}}'
+                />
+              </div>
+            </div>
+            <div class='row g-2 mb-3'>
+              <label for='google_map' class='col-md-4 col-form-label'>
+                Google Map Link
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='text'
+                  name='google_map'
+                  class='form-control'
+                  id='google_map'
+                  value='{{restaurant.google_map}}'
+                />
+              </div>
+            </div>
+            <div class='row g-2 mb-3'>
+              <label for='phone' class='col-md-4 col-form-label'>
+                Phone
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='text'
+                  name='phone'
+                  class='form-control'
+                  id='phone'
+                  value='{{restaurant.phone}}'
+                />
+              </div>
+            </div>
+            <div class='row mb-3 g-2'>
+              <label for='rating' class='col-md-4 col-form-label'>
+                Rating
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='number'
+                  name='rating'
+                  class='form-control'
+                  id='rating'
+                  min='0'
+                  max='5'
+                  step='.1'
+                  value='{{restaurant.rating}}'
+                />
+                <small class='text-muted form-text'>評價 0 ~ 5 分
+                  這家店值得幾分呢?</small>
+              </div>
+            </div>
+            <div class='row g-2 mb-3'>
+              <label for='image' class='col-md-4 col-form-label'>
+                Photo Link
+              </label>
+              <div class='col-md-8'>
+                <input
+                  type='text'
+                  name='image'
+                  class='form-control'
+                  id='image'
+                  value='{{restaurant.image}}'
+                />
+              </div>
+            </div>
+            <div class='row g-2 mb-3'>
+              <label for='description' class='col-md-4 col-form-label'>
+                Description
+              </label>
+              <div class='col-md-8 form-group'>
+                <textarea
+                  type='text'
+                  name='description'
+                  class='form-control'
+                  id='description'
+                  rows='8'
+                >{{restaurant.description}}</textarea>
+                <small
+                  class='text-muted form-text'
+                >向大家介紹一下這家店吧</small>
+              </div>
+            </div>
+            <!-- submit button -->
+            <div class='d-flex justify-content-end'>
+              <button class='btn btn-success' type='submit'>Save</button>
+            </div>
+          </form>
+
+        </div>
+
+        <small class='card-footer text-muted text-end'>
+          Guten Appetit! Thanks for your contribution.
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
