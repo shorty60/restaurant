@@ -12,17 +12,7 @@ db.on('error', () => {
 })
 db.once('open', () => {
   console.log('MongoDB connected, start writing seeds...')
-  restaurantDatas.forEach(data => {
-    Restaurant.create({
-      name: data.name,
-      category: data.category,
-      image: data.image,
-      location: data.location,
-      phone: data.phone,
-      google_map: data.google_map,
-      rating: data.rating,
-      description: data.description,
-    })
-  })
-  console.log('Seeds written!')
+  Restaurant.insertMany(restaurantDatas)
+    .then(() => console.log('Seeds written!'))
+    .catch(error => console.log(error))
 })
