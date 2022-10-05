@@ -85,24 +85,20 @@ app.get('/search', (req, res) => {
     return res.redirect('/')
   }
   let keyword = req.query.keyword.trim()
-  return Restaurant.find()
+  const regKeyword = new RegExp(keyword, 'gi') //將keyword變數裡面的字串轉為正規表達式，flag gi表示ignore大小寫以及整個欄位搜尋
+
+  return Restaurant.find({
+    $or: [{ name: regKeyword }, { category: regKeyword }],
+  })
     .lean()
     .then(restaurants => {
-      const filterRestaurants = restaurants.filter(restaurant => {
-        return (
-          restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          restaurant.category.toLowerCase().includes(keyword.toLowerCase())
-        )
-      })
-      //若filterRestaurants是undefined或null，或是長度為0，表示找不到關鍵字
-      if (!filterRestaurants || !filterRestaurants.length) {
+      if (!restaurants || !restaurants.length) {
         alert(
           `Oops!找不到您要的餐廳\n再試試別的關鍵字吧!\n\n\n按enter回所有清單`
         )
         keyword = ''
       }
-
-      res.render('index', { restaurants: filterRestaurants, keyword })
+      res.render('index', { restaurants, keyword })
     })
     .catch(error => {
       console.log(error)
