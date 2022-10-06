@@ -3,6 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const alert = require('alert')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 
 const Restaurant = require('./models/restaurant')
 const app = express()
@@ -27,6 +28,7 @@ app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 // Setting static files
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
 ////  Setting route
 // http://localhost:3000/ => index page
@@ -44,7 +46,7 @@ app.get('/', (req, res) => {
     })
 })
 
-//http://localhost0/restaurants/new => Add new restaurant
+// http://localhost0/restaurants/new => Add new restaurant
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
@@ -123,7 +125,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     })
 })
 
-app.post('/restaurants/:id/edit/', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const restaurantUpdated = req.body
   restaurantUpdated.rating = Number(restaurantUpdated.rating) // 處理rating data type
@@ -139,7 +141,7 @@ app.post('/restaurants/:id/edit/', (req, res) => {
 })
 
 // Delete function
-app.post('/restaurants/:id/delete/', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => {
