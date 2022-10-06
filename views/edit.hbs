@@ -8,7 +8,10 @@
             {{restaurant.name}}
             <i class='fa-solid fa-utensils'></i></h5>
           <hr />
-          <form method='POST' action='/restaurants/{{restaurant._id}}?_method=PUT'>
+          <form
+            method='POST'
+            action='/restaurants/{{restaurant._id}}?_method=PUT'
+          >
             <div class='row g-2 mb-3'>
               <label for='name' class='col-md-4 col-form-label'>
                 Restaurant Name
@@ -20,6 +23,7 @@
                   class='form-control'
                   id='name'
                   value='{{restaurant.name}}'
+                  onfocus='this.select()'
                   required
                 />
               </div>
@@ -36,6 +40,7 @@
                   name='category'
                   id='category'
                   value='{{restaurant.category}}'
+                  onfocus='this.select()'
                   required
                 />
                 <datalist id='categories'>
@@ -64,6 +69,7 @@
                   class='form-control'
                   id='location'
                   value='{{restaurant.location}}'
+                  onfocus='this.select()'
                   required
                 />
               </div>
@@ -79,6 +85,7 @@
                   class='form-control'
                   id='google_map'
                   value='{{restaurant.google_map}}'
+                  onfocus='this.select()'
                   required
                 />
               </div>
@@ -94,6 +101,7 @@
                   class='form-control'
                   id='phone'
                   value='{{restaurant.phone}}'
+                  onfocus='this.select()'
                   required
                 />
               </div>
@@ -112,6 +120,7 @@
                   max='5'
                   step='.1'
                   value='{{restaurant.rating}}'
+                  onfocus='this.select()'
                   required
                 />
                 <small class='text-muted form-text'>評價 0 ~ 5 分
@@ -129,6 +138,7 @@
                   class='form-control'
                   id='image'
                   value='{{restaurant.image}}'
+                  onfocus='this.select()'
                   required
                 />
               </div>
