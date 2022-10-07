@@ -4,7 +4,7 @@
 
 ## Features 功能描述
 
-- 在首頁檢視餐廳清單和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分
+- 在首頁檢視餐廳清單和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分，可自訂顯示方式排序
 - 可以新增沒在清單上的餐廳
 - 依照餐廳名稱及餐廳類別搜尋餐廳
 - 檢視個別餐廳詳細資訊，包含:類別、地址、電話、描述、圖片以及 Google Map 地圖
@@ -16,7 +16,7 @@
 
 #### 首頁
 
-![首頁](https://github.com/shorty60/restaurant/blob/main/public/image/index.jpg)
+![首頁](https://github.com/shorty60/restaurant/blob/b8daec8427dea09185a688de7beb641ff25f211f/public/image/index.jpg)
 
 #### 搜尋
 
