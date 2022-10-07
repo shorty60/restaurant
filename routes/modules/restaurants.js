@@ -3,7 +3,6 @@ const alert = require('alert')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-// http://localhost0/restaurants/new => 進入 Add new restaurant 頁面
 router.get('/new', (req, res) => {
   return res.render('new')
 })
@@ -22,7 +21,7 @@ router.post('/', (req, res) => {
     })
 })
 
-// http://localhost0/restaurants/:id => 進入 Detail 頁面
+// 進入 Detail 頁面
 router.get('/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -39,7 +38,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// http://localhost:3000/:id/edit => 進入編輯頁面
+// 進入編輯頁面
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)

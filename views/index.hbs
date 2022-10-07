@@ -2,27 +2,48 @@
 <div class='container search-bar'>
   <div class='search-bar-outer'>
     <div class='search-bar-inner'>
-      <form action='/search'>
-        <h4 class='mb-2'>尋找餐廳：</h4>
-        <div class='input-group'>
-          <input
-            type='text'
-            name='keyword'
-            value='{{keyword}}'
-            class='form-control'
-            placeholder='輸入餐廳、分類'
-            aria-label='Restaurant Name...'
-            value=''
-            aria-describedby='search-button'
-            onfocus="this.select()"
-          />
-          <div class='input-group-append'>
-            <button class='btn btn-major' type='submit' id='search-button'><i
-                class='fas fa-search'
-              ></i></button>
+      <form
+        action='/search'
+        class='d-flex justify-content-around align-items-center'
+        name='searchForm'
+      >
+
+        <div class='search-bar'>
+          <div class='input-group' style='min-width: 300px;'>
+            <input
+              type='text'
+              name='keyword'
+              value='{{keyword}}'
+              class='form-control'
+              placeholder='輸入餐廳、分類'
+              aria-label='Restaurant Name...'
+              value=''
+              aria-describedby='search-button'
+              onfocus='this.select()'
+            />
+            <div class='input-group-append'>
+              <button class='btn btn-major' type='submit' id='search-button'><i
+                  class='fas fa-search'
+                ></i></button>
+            </div>
           </div>
         </div>
+        <div class='form-group mt-3'>
+          <select
+            class='form-control'
+            name='sortby'
+            id='sortby'
+            onchange='this.form.submit()'
+          >
+            <option>Sort</option>
+            <option value='1'{{#if sortBy.isNameAsec}} selected{{/if}}>A > Z</option>
+            <option value='2'{{#if sortBy.isNameDsec}} selected{{/if}}>Z > A</option>
+            <option value='3'{{#if sortBy.isCategory}} selected{{/if}}>類別</option>
+            <option value='4'{{#if sortBy.isLocation}} selected{{/if}}>地區</option>
+          </select>
+        </div>
       </form>
+
     </div>
   </div>
 </div>
