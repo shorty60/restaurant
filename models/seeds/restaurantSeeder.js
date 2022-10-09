@@ -7,4 +7,8 @@ db.once('open', () => {
   Restaurant.insertMany(restaurantDatas)
     .then(() => console.log('Seeds written!'))
     .catch(error => console.log(error))
+    .finally(() => {
+      console.log('Please type "npm run start" to run the project.')
+      db.close()
+    })
 })
