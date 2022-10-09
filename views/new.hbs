@@ -8,7 +8,7 @@
             新增你喜歡的餐廳
             <i class='fa-solid fa-utensils'></i></h5>
           <hr />
-          <form method='POST' action='/restaurants'>
+          <form method='POST' action='/restaurants' novalidate>
             <div class='row g-2 mb-3'>
               <label for='name' class='col-md-4 col-form-label'>
                 Restaurant Name
@@ -23,6 +23,12 @@
                   onfocus='this.select()'
                   required
                 />
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='form-group row g-2 mb-3'>
@@ -51,6 +57,12 @@
                 <small
                   class='text-muted form-text'
                 >選擇類型，若找不到可以自行輸入</small>
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
 
             </div>
@@ -68,6 +80,12 @@
                   onfocus='this.select()'
                   required
                 />
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='row g-2 mb-3'>
@@ -84,6 +102,12 @@
                   onfocus='this.select()'
                   required
                 />
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='row g-2 mb-3'>
@@ -100,6 +124,12 @@
                   onfocus='this.select()'
                   required
                 />
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='row mb-3 g-2'>
@@ -120,6 +150,12 @@
                 />
                 <small class='text-muted form-text'>評價 0 ~ 5 分
                   這家店值得幾分呢?</small>
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='row g-2 mb-3'>
@@ -136,6 +172,12 @@
                   onfocus='this.select()'
                   required
                 />
+                <div class='valid-feedback'>
+                  Looks good!
+                </div>
+                <div class='invalid-feedback'>
+                  這個欄位必填喔
+                </div>
               </div>
             </div>
             <div class='row g-2 mb-3'>
@@ -150,7 +192,6 @@
                   id='description'
                   placeholder='向大家介紹一下這家店吧!'
                   rows='8'
-                  required
                 >{{restaurant.description}}</textarea>
                 <small
                   class='text-muted form-text'
@@ -162,7 +203,7 @@
               <button
                 class='btn btn-success'
                 type='submit'
-                id='submitButton'
+                id='submit-button'
               >Create</button>
             </div>
           </form>
@@ -176,3 +217,5 @@
     </div>
   </div>
 </div>
+
+<script src='/javascripts/validation.js'></script>

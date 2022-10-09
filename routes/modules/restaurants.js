@@ -1,5 +1,4 @@
 const express = require('express')
-const alert = require('alert')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
@@ -16,7 +15,6 @@ router.post('/', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => {
       console.log(error)
-      alert('Something error...')
       return res.redirect('/restaurants/new')
     })
 })
@@ -24,11 +22,13 @@ router.post('/', (req, res) => {
 // 進入 Detail 頁面
 router.get('/:id', (req, res) => {
   const id = req.params.id
+  let notInDatabase = false
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => {
       if (!restaurant) {
-        return res.render('error')
+        notInDatabase = true
+        return res.render('error', { notInDatabase })
       }
       res.render('show', { restaurant })
     })
@@ -41,11 +41,13 @@ router.get('/:id', (req, res) => {
 // 進入編輯頁面
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
+  let notInDatabase = false
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => {
       if (!restaurant) {
-        return res.render('error')
+        notInDatabase = true
+        return res.render('error', { notInDatabase })
       }
       res.render('edit', { restaurant })
     })
@@ -76,7 +78,7 @@ router.delete('/:id', (req, res) => {
   return Restaurant.findById(id)
     .then(restaurant => {
       if (!restaurant) {
-        return alert(`Oops! 找不到這個餐廳!抱歉`)
+        return
       }
       return restaurant.remove()
     })

@@ -16,7 +16,7 @@
 
 #### 首頁
 
-![首頁](https://github.com/shorty60/restaurant/blob/b8daec8427dea09185a688de7beb641ff25f211f/public/image/index.jpg)
+![首頁](https://github.com/shorty60/restaurant/blob/main/public/image/index.jpg)
 
 #### 搜尋
 
@@ -100,6 +100,7 @@ ctrl + c
 - [Express](https://www.npmjs.com/package/express) - Node.js Web 應用程式架構，版本 4.16.4
 - [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - 模板引擎，版本 3.0.0
 - [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/) - 前端樣版，版本 4.3.1
+- [Mongoose](https://mongoosejs.com/) - MongoDB ODM，版本 6.6.3
 
 ## Authors 開發人員
 

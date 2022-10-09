@@ -45,11 +45,27 @@
       </form>
 
     </div>
+    {{#if notFound}}
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Oops! 找不到關鍵字</h4>
+        <p>再試試其他餐廳名稱或類別吧</p>
+        <hr>
+        <p class="mb-0">或按enter鍵可瀏覽所有清單</p>
+      </div>
+    {{/if}}
   </div>
 </div>
 
+
 <!-- restaurant list -->
 <div class='container mt-5'>
+  {{#if noRestaurants}}
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">還沒有餐廳資料喔</h4>
+      <p>快來新增第一筆吧!</p>
+    </div>
+  {{/if}}
+  
   <div class='row'>
     <div class='col-md-10 col-12 mx-auto'>
       <div class='card-columns mb-5'>
@@ -116,6 +132,4 @@
   </div>
 </div>
 
-<script>
-  function onDeleteClicked() { alert('這筆資料即將被刪除') }
-</script>
+<script src="/javascripts/main.js"></script>

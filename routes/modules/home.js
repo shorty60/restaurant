@@ -1,18 +1,18 @@
 const express = require('express')
-const alert = require('alert')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const sorting = require('../../utilities/sort')
 
 // http://localhost:3000/ => index page
 router.get('/', (req, res) => {
+  noRestaurants = false
   return Restaurant.find()
     .lean()
     .then(restaurants => {
       if (!restaurants.length) {
-        alert('還沒有餐廳資料喔!\n快來新增第一筆吧!')
+        noRestaurants = true
       }
-      res.render('index', { restaurants })
+      res.render('index', { restaurants, noRestaurants })
     })
     .catch(error => {
       console.error(error)
@@ -24,7 +24,8 @@ router.get('/search', (req, res) => {
   let keyword = req.query.keyword.trim()
   const regKeyword = new RegExp(keyword, 'gi') // 將keyword變數裡面的字串轉為正規表達式，flag gi表示ignore大小寫以及整個欄位搜尋
   const sortby = req.query.sortby
-  const [ sortCondition, sortBy ]= sorting(sortby)
+  const [sortCondition, sortBy] = sorting(sortby)
+  let notFound = false
 
   return Restaurant.find({
     $or: [{ name: regKeyword }, { category: regKeyword }],
@@ -33,12 +34,10 @@ router.get('/search', (req, res) => {
     .lean()
     .then(restaurants => {
       if (!restaurants || !restaurants.length) {
-        alert(
-          `Oops!找不到您要的餐廳\n再試試別的關鍵字吧!\n\n\n按enter回所有清單`
-        )
+        notFound = true
         keyword = ''
       }
-      res.render('index', { restaurants, keyword, sortBy })
+      res.render('index', { restaurants, keyword, sortBy, notFound })
     })
     .catch(error => {
       console.log(error)
