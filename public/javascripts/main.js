@@ -1,4 +1,3 @@
 function onDeleteClicked() {
-  alert('這筆資料即將被刪除')
+  alert('您即將刪除此筆餐廳資料')
 }
-
