@@ -10,6 +10,12 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
   const restaurant = req.body
   restaurant.rating = Number(restaurant.rating)
+  restaurant.image = restaurant.image.length
+    ? restaurant.image
+    : 'https://drive.google.com/uc?export=view&id=1w95K1xGkXNtmD-nV3BZWx5VY_iT1QmRX'
+  restaurant.description = restaurant.description
+    ? restaurant.description
+    : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
 
   return Restaurant.create(restaurant)
     .then(() => res.redirect('/'))
@@ -61,6 +67,12 @@ router.put('/:id', (req, res) => {
   const id = req.params.id
   const restaurantUpdated = req.body
   restaurantUpdated.rating = Number(restaurantUpdated.rating) // 處理rating data type
+  restaurantUpdated.image = restaurantUpdated.image.length
+    ? restaurantUpdated.image
+    : 'https://drive.google.com/uc?export=view&id=1w95K1xGkXNtmD-nV3BZWx5VY_iT1QmRX'
+  restaurantUpdated.description = restaurantUpdated.description
+    ? restaurantUpdated.description
+    : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
 
   return Restaurant.findByIdAndUpdate(id, restaurantUpdated)
     .then(() => {
