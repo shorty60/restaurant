@@ -6,7 +6,7 @@ if (process.env.Node_ENV !== 'production') {
   require('dotenv').config()
 }
 const session = require('express-session')
-const usePassport= require('./config/passport')
+const usePassport = require('./config/passport')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -34,6 +34,11 @@ app.use(methodOverride('_method'))
 
 usePassport(app)
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 // request送進路由
 app.use(routes)
 
