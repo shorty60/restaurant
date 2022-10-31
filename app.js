@@ -6,6 +6,7 @@ if (process.env.Node_ENV !== 'production') {
   require('dotenv').config()
 }
 const session = require('express-session')
+const usePassport= require('./config/passport')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -22,13 +23,17 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 )
+
 // 對request做前處理
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+
+usePassport(app)
+
 // request送進路由
 app.use(routes)
 
