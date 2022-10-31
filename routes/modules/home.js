@@ -6,7 +6,9 @@ const sorting = require('../../utilities/sort')
 // http://localhost:3000/ => index page
 router.get('/', (req, res) => {
   noRestaurants = false
-  return Restaurant.find()
+  const userId = req.user._id
+  return Restaurant.find({ userId })
+    .sort({ _id: 'asc' })
     .lean()
     .then(restaurants => {
       if (!restaurants.length) {
