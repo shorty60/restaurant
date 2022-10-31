@@ -8,8 +8,10 @@
             class='form-control'
             id='name'
             name='name'
+            onfocus='this.select()'
             placeholder='Enter name'
             type='name'
+            value='{{name}}'
           />
         </div>
         <label for='email'>Email</label>
@@ -18,8 +20,10 @@
             class='form-control'
             id='email'
             name='email'
+            onfocus='this.select()'
             placeholder='Enter email'
             type='email'
+            value='{{email}}'
             required
           />
           <div class='valid-feedback'>
@@ -36,8 +40,10 @@
             class='form-control'
             id='password'
             name='password'
-            type='password'
+            onfocus='this.select()'
             placeholder='Enter password'
+            type='password'
+            value='{{password}}'
             required
           />
           <div class='valid-feedback'>
@@ -54,8 +60,10 @@
             class='form-control'
             id='confirmPassword'
             name='confirmPassword'
-            type='confirmPassword'
+            onfocus='this.select()'
             placeholder='Confirm password'
+            type='password'
+            value='{{confirmPassword}}'
             required
           />
           <div class='valid-feedback'>
