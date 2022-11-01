@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const FacebookStrategy = require('passport-facebook')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
@@ -50,8 +51,37 @@ module.exports = app => {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL:  process.env.FACEBOOK_CALLBACK,
+        callbackURL: process.env.FACEBOOK_CALLBACK,
         profileFields: ['email', 'displayName'],
+      },
+      (accessToken, refreshToken, profile, done) => {
+        let { name, email } = profile._json
+        if (!name) {
+          name = 'User' //若抓不到使用者名稱，填一個值
+        }
+        User.findOne({ email }).then(user => {
+          if (user) {
+            return done(null, user)
+          }
+          const randomPassword = Math.random().toString(36).slice(-8)
+          bcrypt
+            .genSalt(10)
+            .then(salt => bcrypt.hash(randomPassword, salt))
+            .then(hash => User.create({ name, email, password: hash }))
+            .then(user => done(null, user))
+            .catch(error => done(error, false))
+        })
+      }
+    )
+  )
+
+  // google OAuth
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK,
       },
       (accessToken, refreshToken, profile, done) => {
         let { name, email } = profile._json

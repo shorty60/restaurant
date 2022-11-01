@@ -15,4 +15,18 @@ router.get(
   })
 )
 
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] })
+)
+
+
+router.get(
+  '/google/redirect',
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+  })
+)
+
 module.exports = router
