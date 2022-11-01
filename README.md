@@ -4,13 +4,15 @@
 
 ## Features 功能描述
 
-- 在首頁檢視餐廳清單和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分，可自訂顯示方式排序
-- 可以新增沒在清單上的餐廳
-- 依照餐廳名稱及餐廳類別搜尋餐廳
-- 檢視個別餐廳詳細資訊，包含:類別、地址、電話、描述、圖片以及 Google Map 地圖
+- 使用者註冊我們的網站後可開始使用我們的服務，也可以使用FB或Google登入
+- 使用者登入後可以在首頁看到他收藏的餐廳和它們的簡單資料: 包含餐廳名、餐廳類別、圖片、評分，可自訂顯示方式排序
+- 使用者可以新增他的收藏餐廳
+- 使用者可依照餐廳名稱及餐廳類別搜尋珍藏餐廳
+- 使用者可檢視個別餐廳詳細資訊，包含:類別、地址、電話、描述、圖片以及 Google Map 地圖
   - 在地址列點選 飛機圖示 可打開 google map 查看位置詳細資料以及規劃路線
 - 您也可以修改目前已有的餐廳資料，告訴我們最即時詳盡的餐廳資訊
 - 可以移除餐廳資料
+
 
 ## Screen Photos 專案畫面
 
@@ -58,12 +60,18 @@ cd restaurant //切至專案資料夾
 npm install  //安裝套件
 ```
 
-4.設定 MongoDB 環境變數
+4.設定環境變數，請參考.env.example範例新增一個.env檔案
 
 ```
-set "MONGODB_URI=你的MongoDB連線字串" // for Windows cmd
-
-export MONGODB_URI="你的MongoDB連線字串" // for bash (Both MacOS bash terminal and Git bash for Windows)
+FACEBOOK_APP_ID=SKIP
+FACEBOOK_APP_SECRET=SKIP
+FACEBOOK_CALLBACK=http://localhost:3000/auth/facebook/callback
+MONGODB_URI=mongodb://localhost/restaurant-list
+SECRET="Jhu9*&#Yt"
+GOOGLE_CLIENT_ID=SKIP
+GOOGLE_CLIENT_SECRET=SKIP
+GOOGLE_CALLBACK=http://localhost:3000/auth/google/redirect
+PORT=3000
 
 ```
 
@@ -95,11 +103,8 @@ ctrl + c
 
 ## Built With 開發環境及套件
 
-- [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/) - 開發環境
 - [Node.js](https://nodejs.org/zh-tw/download/) - 版本 16.17.0
 - [Express](https://www.npmjs.com/package/express) - Node.js Web 應用程式架構，版本 4.16.4
-- [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - 模板引擎，版本 3.0.0
-- [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/) - 前端樣版，版本 4.3.1
 - [Mongoose](https://mongoosejs.com/) - MongoDB ODM，版本 6.6.3
 
 ## Authors 開發人員
