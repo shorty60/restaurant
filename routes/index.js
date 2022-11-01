@@ -6,10 +6,15 @@ const restaurants = require('./modules/restaurants')
 const users = require('./modules/users')
 const auth = require('./modules/auth')
 const { authenticator } = require('../middleware/auth')
+const { route } = require('./modules/restaurants')
 
 router.use('/users', users)
 router.use('/auth', auth)
 router.use('/restaurants', authenticator, restaurants)
 router.use('/', authenticator, home)
+
+router.use('*', (req, res) => {
+  res.send('404')
+})
 
 module.exports = router

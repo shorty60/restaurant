@@ -5,6 +5,7 @@
       <div class='card'>
         <div class='card-body'>
           <h5 class='card-title'>
+            {{> message}}
             {{restaurant.name}}
             <i class='fa-solid fa-utensils'></i></h5>
           <hr />
@@ -192,7 +193,7 @@
                 >{{restaurant.description}}</textarea>
                 <small
                   class='text-muted form-text'
-                >向大家介紹一下這家店吧</small>
+                >向大家介紹一下這家店吧(300字以內)</small>
               </div>
             </div>
             <!-- submit button -->

@@ -44,6 +44,7 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
   res.locals.loginFailed_msg = req.flash('error_messages')
+  res.locals.extractedErrors = req.flash('errors')
   next()
 })
 // request送進路由

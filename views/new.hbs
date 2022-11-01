@@ -8,6 +8,7 @@
             新增你喜歡的餐廳
             <i class='fa-solid fa-utensils'></i></h5>
           <hr />
+          {{> message}}
           <form method='POST' action='/restaurants' novalidate>
             <div class='row g-2 mb-3'>
               <label for='name' class='col-md-4 col-form-label'>
@@ -189,7 +190,7 @@
                 >{{restaurant.description}}</textarea>
                 <small
                   class='text-muted form-text'
-                >向大家介紹一下這家店吧</small>
+                >向大家介紹一下這家店吧(300字以內)</small>
               </div>
             </div>
             <!-- submit button -->
