@@ -12,21 +12,24 @@ const db = require('../../config/mongoose')
 
 db.once('open', () => {
   console.log('start writing seeds...')
+
   Promise.all(
-    usersDatas.map(async user => {
+    usersDatas.map(user => {
       const { name, email, password, restaurantIndex } = user
-      await bcrypt
-        .genSalt(10)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hash => User.create({ name, email, password: hash }))
-        .then(user => {
-          const restaurants = []
-          for (i = 0; i < restaurantIndex.length; i++) {
-            restaurantDatas[restaurantIndex[i]].userId = user._id // 新增userId屬性進去restaurant物件
-            restaurants.push(restaurantDatas[restaurantIndex[i]]) // 把新鄒userId的餐廳物件推進restaurants陣列
-          }
-          return Restaurant.insertMany(restaurants) // restaurants陣列整個寫入資料庫，all or nothing
+
+      return User.create({
+        name,
+        email,
+        password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
+      }).then(user => {
+        const restaurants = restaurantIndex.map(index => {
+          const restaurant = restaurantDatas[index]
+          restaurant.userId = user._id
+          return restaurant
         })
+
+        return Restaurant.insertMany(restaurants) // restaurants陣列整個寫入資料庫，all or nothing
+      })
     })
   )
     .then(() => {

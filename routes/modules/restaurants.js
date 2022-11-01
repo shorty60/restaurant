@@ -1,4 +1,5 @@
 const express = require('express')
+const { body, validationResult } = require('express-validator')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
@@ -7,25 +8,28 @@ router.get('/new', (req, res) => {
 })
 
 // 新增餐廳
-router.post('/', (req, res) => {
-  const userId = req.user._id
-  const restaurant = req.body
-  restaurant.rating = Number(restaurant.rating)
-  restaurant.image = restaurant.image.trim()
-    ? restaurant.image.trim()
-    : 'https://raw.githubusercontent.com/shorty60/restaurant/784587901e03a9914fac33a16f0884708a238d56/public/image/restaurant%20not%20found.png'
-  restaurant.description = restaurant.description.trim()
-    ? restaurant.description.trim()
-    : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
-  restaurant.userId = userId
+router.post(
+  '/',
+  (req, res) => {
+    const userId = req.user._id
+    const restaurant = req.body
+    restaurant.rating = Number(restaurant.rating)
+    restaurant.image = restaurant.image.trim()
+      ? restaurant.image.trim()
+      : 'https://raw.githubusercontent.com/shorty60/restaurant/784587901e03a9914fac33a16f0884708a238d56/public/image/restaurant%20not%20found.png'
+    restaurant.description = restaurant.description.trim()
+      ? restaurant.description.trim()
+      : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
+    restaurant.userId = userId
 
-  return Restaurant.create(restaurant)
-    .then(() => res.redirect('/'))
-    .catch(error => {
-      console.log(error)
-      return res.redirect('/restaurants/new')
-    })
-})
+    return Restaurant.create(restaurant)
+      .then(() => res.redirect('/'))
+      .catch(error => {
+        console.log(error)
+        return res.redirect('/restaurants/new')
+      })
+  }
+)
 
 // 進入 Detail 頁面
 router.get('/:id', (req, res) => {

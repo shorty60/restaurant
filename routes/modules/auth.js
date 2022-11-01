@@ -20,7 +20,6 @@ router.get(
   passport.authenticate('google', { scope: ['email', 'profile'] })
 )
 
-
 router.get(
   '/google/redirect',
   passport.authenticate('google', {
