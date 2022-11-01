@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
 
 // http://localhost:3000/search => 搜尋功能
 router.get('/search', (req, res) => {
+  const userId = req.user._id
   let keyword = req.query.keyword.trim()
   const regKeyword = new RegExp(keyword, 'gi') // 將keyword變數裡面的字串轉為正規表達式，flag gi表示ignore大小寫以及整個欄位搜尋
   const sortby = req.query.sortby
@@ -30,6 +31,7 @@ router.get('/search', (req, res) => {
   let notFound = false
 
   return Restaurant.find({
+    userId,
     $or: [{ name: regKeyword }, { category: regKeyword }],
   })
     .sort(sortCondition)

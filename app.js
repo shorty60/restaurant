@@ -7,6 +7,7 @@ if (process.env.Node_ENV !== 'production') {
 }
 const session = require('express-session')
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -33,10 +34,13 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
 usePassport(app)
-
+app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.loginFailed_msg = req.flash('error_messages')
   next()
 })
 // request送進路由
