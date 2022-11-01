@@ -1,6 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const { body, validationResult } = require('express-validator')
+const bcrypt = require('bcryptjs')
 
 const router = express.Router()
 
@@ -39,7 +40,7 @@ router.get('/register', (req, res) => {
 router.post(
   '/register',
 
-  // 驗證miidleware
+  // 驗證使用者輸入miidleware
   [
     body('email').isEmail().trim().withMessage('請輸入email'),
     body('password').not().isEmpty().trim().withMessage('請填寫密碼'),
@@ -83,7 +84,10 @@ router.post(
           confirmPassword,
         })
       }
-      return User.create({ name, email, password})
+      return bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({ name, email, password: hash }))
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
     })
