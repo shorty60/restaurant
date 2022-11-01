@@ -6,7 +6,7 @@ const restaurants = require('./modules/restaurants')
 const users = require('./modules/users')
 const auth = require('./modules/auth')
 const { authenticator } = require('../middleware/auth')
-const { route } = require('./modules/restaurants')
+
 
 router.use('/users', users)
 router.use('/auth', auth)
