@@ -99,7 +99,21 @@ Restaurant List is listening on http://localhost:3000
 
 即啟動完成，請至[http://localhost:3000](http://localhost:3000)開啟網站
 
-8.中斷伺服器連線，請按
+8.可使用下面兩個使用者帳號測試
+
+```
+User1
+email: user1@example.com
+password: 12345678
+-----
+
+User2
+email: user2@example.com
+password: 12345678
+
+```
+
+9.中斷伺服器連線，請按
 
 ```
 ctrl + c
