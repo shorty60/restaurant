@@ -27,10 +27,9 @@ router.post(
 router.get('/logout', (req, res, next) => {
   req.logout(err => {
     if (err) {
-      next(err)
+      return next(err)
     }
     req.flash('success_msg', '你已經成功登出!')
-    req.session.destroy()
     return res.redirect('/users/login')
   })
 })

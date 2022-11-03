@@ -1,8 +1,9 @@
 <div class='jumbotron jumbotron-fluid'>
   <div class='container'>
-    {{> message}}
-    <h1 class='display-4 mb-5'>Sorry! Internal Server Error.</h1>
+    <h1 class='display-4 mb-5'>500 Sorry! Internal Error.</h1>
     <i class='fa-solid fa-person-digging fa-10x mb-3'></i>
-    <p class='lead mt-10'>There is something error.</p>
+    {{#if serverError}}
+    <p class='lead mt-10'>{{serverError}}</p>
+    {{/if}}
   </div>
 </div>
