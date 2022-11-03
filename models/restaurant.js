@@ -11,7 +11,6 @@ const restaurantSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
@@ -31,7 +30,6 @@ const restaurantSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,

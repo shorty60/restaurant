@@ -1,10 +1,13 @@
 const express = require('express')
 const { body, validationResult } = require('express-validator')
+const assert = require('assert')
 const router = express.Router()
 
 const Restaurant = require('../../models/restaurant')
-const { validators } = require('../../middleware/validation') // Incluse express-validator的驗證middleware
+const { validators } = require('../../middleware/validation') // Include express-validator的驗證middleware
+const { NoRestaurantError } = require('../../utilities/errortype') // Include errortype class define
 
+// 進入新增餐廳頁面
 router.get('/new', (req, res) => {
   return res.render('new')
 })
@@ -14,6 +17,7 @@ router.post('/', validators, (req, res) => {
   const errors = validationResult(req)
   const extractedErrors = [] // 提取驗證結果的錯誤訊息
 
+  // 如果express-validator驗證有誤，則顯示flash message給使用者
   if (!errors.isEmpty()) {
     errors.array().map(err => extractedErrors.push(err.msg))
     return res.status(400).render('new', {
@@ -21,66 +25,55 @@ router.post('/', validators, (req, res) => {
     })
   }
 
+  // 整理要寫進資料庫的資料
   const userId = req.user._id
   const restaurant = req.body
   restaurant.rating = Number(restaurant.rating)
-  restaurant.image = restaurant.image
-    ? restaurant.image
-    : 'https://raw.githubusercontent.com/shorty60/restaurant/784587901e03a9914fac33a16f0884708a238d56/public/image/restaurant%20not%20found.png'
-  restaurant.description = restaurant.description
-    ? restaurant.description
-    : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
   restaurant.userId = userId
 
+  // 寫入資料庫
   return Restaurant.create(restaurant)
     .then(() => res.redirect('/'))
-    .catch(error => {
-      console.log(error)
+    .catch(err => {
+      console.log(err)
       return res.redirect('/restaurants/new')
     })
 })
 
 // 進入 Detail 頁面
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
-  let notInDatabase = false
+
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => {
-      if (!restaurant) {
-        notInDatabase = true
-        return res.render('error', { notInDatabase })
-      }
-      res.render('show', { restaurant })
+      assert(restaurant, new NoRestaurantError('找不到這間餐廳'))
+      return res.render('show', { restaurant })
     })
-    .catch(error => {
-      console.log(error)
-      return res.render('error')
+    .catch(err => {
+      next(err) //把錯誤丟出去給error-handling middleware
     })
 })
 
 // 進入編輯頁面
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
-  let notInDatabase = false
+
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => {
-      if (!restaurant) {
-        notInDatabase = true
-        return res.render('error', { notInDatabase })
-      }
-      res.render('edit', { restaurant })
+      assert(restaurant, new NoRestaurantError('找不到這間餐廳'))
+      return res.render('edit', { restaurant })
     })
-    .catch(error => {
-      console.log(error)
-      return res.render('error')
+    .catch(err => {
+      next(err)
     })
 })
+
 // 送出餐廳更新資料
-router.put('/:id', validators, (req, res) => {
+router.put('/:id', validators, (req, res, next) => {
   const errors = validationResult(req)
   const extractedErrors = [] // 提取驗證結果的錯誤訊息
 
@@ -95,39 +88,30 @@ router.put('/:id', validators, (req, res) => {
     return res.status(400).redirect(`/restaurants/${_id}/edit`)
   }
 
+  //整理要寫入資料庫的資料
   restaurant.rating = Number(restaurant.rating) // 處理rating data type
-  restaurant.image = restaurant.image
-    ? restaurant.image
-    : 'https://raw.githubusercontent.com/shorty60/restaurant/784587901e03a9914fac33a16f0884708a238d56/public/image/restaurant%20not%20found.png'
-  restaurant.description = restaurant.description
-    ? restaurant.description
-    : '還沒有這間餐廳的介紹喔!快來幫我們認識這間餐廳吧!'
 
   return Restaurant.findOneAndUpdate({ _id, userId }, restaurant)
     .then(() => {
       return res.redirect(`/restaurants/${_id}/`)
     })
-    .catch(error => {
-      console.log(error)
-      return res.render('error')
+    .catch(err => {
+      next(err)
     })
 })
 
 // 刪除餐廳
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
   return Restaurant.findOne({ _id, userId })
     .then(restaurant => {
-      if (!restaurant) {
-        return
-      }
+      assert(restaurant, new NoRestaurantError('找不到這間餐廳'))
       return restaurant.remove()
     })
     .then(() => res.redirect('/'))
-    .catch(error => {
-      console.log(error)
-      return res.render('error')
+    .catch(err => {
+      next(err)
     })
 })
 

@@ -8,6 +8,7 @@ if (process.env.Node_ENV !== 'production') {
 const session = require('express-session')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
+const MongoStore = require('connect-mongo')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -25,6 +26,13 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      autoRemove: 'native', // cookie到期時預設TTL也到期，把expire的session移除
+    }),
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // cookie存活時間 7 天，7天後清除cookie及session
+    },
   })
 )
 

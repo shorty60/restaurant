@@ -14,7 +14,7 @@ module.exports = {
       .withMessage('請輸入URL'),
     body('phone').not().isEmpty().trim().withMessage('請輸入店家連絡電話'),
     body('rating').not().isEmpty().trim().withMessage('請輸入店家評分'),
-    body('image').isURL().trim().withMessage('請輸入圖片連結'),
+    body('image').if(body('image').isURL().trim().withMessage('請輸入圖片連結')),
     body('description')
       .trim()
       .isLength({ min: 0, max: 300 })

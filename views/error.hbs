@@ -1,10 +1,8 @@
 <div class='jumbotron jumbotron-fluid'>
   <div class='container'>
-    <h1 class='display-4 mb-5'>Sorry! 找不到這間餐廳...</h1>
+    {{> message}}
+    <h1 class='display-4 mb-5'>Sorry! Internal Server Error.</h1>
     <i class='fa-solid fa-person-digging fa-10x mb-3'></i>
     <p class='lead mt-10'>There is something error.</p>
-    {{#if notInDatabase}}
-      <h3>這間餐廳不在我們的清單上了，幫他Create一篇新的介紹吧!</h3>
-    {{/if}}
   </div>
 </div>
